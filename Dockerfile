@@ -14,6 +14,9 @@ RUN apk --no-cache add curl ca-certificates && \
   echo "${CONSUL_TEMPLATE_SHA256}  /tmp/consul-template.zip" | sha256sum -c && \
   unzip /tmp/consul-template.zip -d /usr/bin/ && \
   rm -f /tmp/envconsul.zip /tmp/consul-template.zip && \
-  apk del --purge curl
+  apk del --purge curl && \
+  adduser -h /mastodon -s /bin/sh -DHS mastodon && \
+  rm -rf /tmp/* /var/cache/apk/*
 
+USER mastodon
 ENTRYPOINT []
