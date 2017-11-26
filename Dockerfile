@@ -16,7 +16,8 @@ RUN apk --no-cache add curl ca-certificates && \
   rm -f /tmp/envconsul.zip /tmp/consul-template.zip && \
   apk del --purge curl && \
   adduser -h /mastodon -s /bin/sh -DHS mastodon && \
-  rm -rf /tmp/* /var/cache/apk/*
+  rm -rf /tmp/* /var/cache/apk/* && \
+  find /mastodon -path /mastodon/public/system -prune -o -not -user mastodon -print0 | xargs -0 chown -f mastodon
 
 USER mastodon
 ENTRYPOINT []
